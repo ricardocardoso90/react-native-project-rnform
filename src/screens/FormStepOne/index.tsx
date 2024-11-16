@@ -1,10 +1,12 @@
 import { styles } from "./styles";
-import { Text, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
+import { useRef } from "react";
 
 export function FormStepOne() {
-  const { control } = useForm();
+  const { control, handleSubmit } = useForm();
+  const emailRef = useRef<TextInput>(null);
 
   return (
     <View style={styles.container}>
@@ -15,13 +17,19 @@ export function FormStepOne() {
         name="name"
         control={control}
         placeholder="Nome"
+        onSubmitEditing={() => emailRef.current?.focus()}
+        returnKeyType="next"
 
       // formProps={{
       //   name: 'name',
       //   control: control
       // }}
 
-      // inputProps={{placeholder: 'Nome'}}
+      // inputProps={{
+      //   placeholder: 'Nome',
+      //   onSubmitEditing: () => emailRef.current?.focus(),
+      //   returnKeyType: 'next'
+      // }}
       />
 
       <Input
@@ -29,6 +37,7 @@ export function FormStepOne() {
         name="email"
         control={control}
         placeholder="Email"
+        ref={emailRef}
 
       // formProps={{
       //   name: 'name',

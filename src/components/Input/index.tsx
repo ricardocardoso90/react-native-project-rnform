@@ -6,11 +6,11 @@ import { forwardRef } from "react";
 
 type Props = TextInputProps & UseControllerProps & {
   icon: keyof typeof Feather.glyphMap;
-  //   inputProps: TextInputProps;
-  //   formProps: UseControllerProps;
+    // inputProps: TextInputProps;
+    // formProps: UseControllerProps;
 };
 
-const Input = forwardRef<TextInput, Props>(({ icon, name, control, placeholder }, ref) => {
+const Input = forwardRef<TextInput, Props>(({ icon, name, control, placeholder, onSubmitEditing, returnKeyType }, ref) => {
   return (
     <Controller
       render={() => (
@@ -27,6 +27,8 @@ const Input = forwardRef<TextInput, Props>(({ icon, name, control, placeholder }
             ref={ref}
             style={styles.control}
             placeholder={placeholder}
+            onSubmitEditing={onSubmitEditing}
+            returnKeyType={returnKeyType}
           // {...inputProps}
           />
         </View>
