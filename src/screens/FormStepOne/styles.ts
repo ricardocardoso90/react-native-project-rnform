@@ -5,10 +5,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     justifyContent: 'center',
-    backgroundColor: '#F4F5F6'
+    backgroundColor: '#F4F5F6',
+    gap: 16,
   },
   title: {
     fontSize: 24,
     fontWeight: '700',
+    marginBottom: 44,
   }
 });
