@@ -6,6 +6,7 @@ import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAccountForm } from "../../hooks/useAccountForm";
+import { Progress } from "../../components/Progress";
 
 export function FormStepOne() {
   const { navigate } = useNavigation();
@@ -21,6 +22,7 @@ export function FormStepOne() {
 
   return (
     <View style={styles.container}>
+      <Progress progress={33}/>
       <Text style={styles.title}>Criar sua conta</Text>
 
       <Input

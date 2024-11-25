@@ -5,15 +5,19 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
 import { useAccountForm } from "../../hooks/useAccountForm";
+import { useNavigation } from "@react-navigation/native";
+import { Progress } from "../../components/Progress";
 
 export function FormStepThree() {
-  const { control, handleSubmit, formState: { errors }, getValues } = useForm();
+  const { navigate } = useNavigation();
   const passwordConfirmationRef = useRef<TextInput>(null);
+  const { control, handleSubmit, formState: { errors }, getValues } = useForm();
 
   const { updateFormData } = useAccountForm();
 
   function handleNextStep(data: any) {
     updateFormData(data);
+    navigate("finish");
   };
 
   function validationPasswordConfirmation(passwordConfirmation: string) {
@@ -24,6 +28,7 @@ export function FormStepThree() {
 
   return (
     <View style={styles.container}>
+      <Progress progress={100}/>
       <Text style={styles.title}>Escolha sua senha</Text>
 
       <Input
