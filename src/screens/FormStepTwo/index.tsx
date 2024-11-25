@@ -4,13 +4,19 @@ import { useForm } from "react-hook-form";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useAccountForm } from "../../hooks/useAccountForm";
 
 export function FormStepTwo() {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { navigate } = useNavigation();
   const phoneRef = useRef<TextInput>(null);
+  const { control, handleSubmit, formState: { errors } } = useForm();
+
+  const { updateFormData } = useAccountForm();
 
   function handleNextStep(data: any) {
-    console.log(data);
+    updateFormData(data);
+    navigate("formStepThree");
   };
 
   return (
@@ -26,7 +32,11 @@ export function FormStepTwo() {
         errors={errors.birth?.message}
         onSubmitEditing={() => phoneRef.current?.focus()}
         rules={{
-          required: "Data de nascimento é obrigatória."
+          required: "Data de nascimento é obrigatória.",
+          pattern: {
+            value: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+            message: "Data de nascimento inválida."
+          }
         }}
 
       // formProps={{
@@ -51,10 +61,10 @@ export function FormStepTwo() {
         onSubmitEditing={handleSubmit(handleNextStep)}
         rules={{
           required: "Telefone é Obrigatório",
-          // pattern: {
-          //   value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i,
-          //   message: "Email Inválido"
-          // }
+          pattern: {
+            value: /^\([1-9]{2}\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/,
+            message: "Telefone Inválido."
+          }
         }}
 
       // formProps={{

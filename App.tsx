@@ -1,7 +1,10 @@
-import { FormStepOne } from './src/screens/FormStepOne';
+import { Routes } from "./src/routes";
+import { AccountContext } from "./src/contexts/AccountFormContext";
 
 export default function App() {
   return (
-    <FormStepOne />
+    <AccountContext>
+      <Routes />
+    </AccountContext>
   );
 };

@@ -6,26 +6,18 @@ import { Text, TextInput, TextInputProps, View } from "react-native";
 import { Controller, UseControllerProps } from "react-hook-form";
 
 type Props = TextInputProps & UseControllerProps & {
+  control?: any;
+  errors?: string | any;
+  // rules: string | any;
+  secureTextEntry?: any;
   // inputProps: TextInputProps;
   // formProps: UseControllerProps;
   icon: keyof typeof Feather.glyphMap;
-  errors: string | any;
-  rules: string | any;
-  secureTextEntry?: any;
 };
 
 const Input = forwardRef<TextInput, Props>((
-  {
-    icon,
-    name,
-    control,
-    placeholder,
-    onSubmitEditing,
-    returnKeyType,
-    errors = '',
-    rules,
-    secureTextEntry
-  }, ref) => {
+  { icon, name, control, placeholder, onSubmitEditing,
+    returnKeyType, errors = '', rules, secureTextEntry }, ref) => {
 
   return (
     <Controller
@@ -46,10 +38,10 @@ const Input = forwardRef<TextInput, Props>((
 
             <TextInput
               ref={ref}
-              style={styles.control}
+              style={styles.controls}
               value={field.value}
-              onChangeText={field.onChange}
               placeholder={placeholder}
+              onChangeText={field.onChange}
               onSubmitEditing={onSubmitEditing}
               returnKeyType={returnKeyType}
               secureTextEntry={secureTextEntry}

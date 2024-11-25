@@ -4,13 +4,19 @@ import { useForm } from "react-hook-form";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useAccountForm } from "../../hooks/useAccountForm";
 
 export function FormStepOne() {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { navigate } = useNavigation();
   const emailRef = useRef<TextInput>(null);
+  const { control, handleSubmit, formState: { errors } } = useForm();
+
+  const { updateFormData } = useAccountForm();
 
   function handleNextStep(data: any) {
-    console.log(data);
+    updateFormData(data);
+    navigate("formStepTwo");
   };
 
   return (

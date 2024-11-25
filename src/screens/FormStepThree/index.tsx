@@ -4,18 +4,27 @@ import { useForm } from "react-hook-form";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
+import { useAccountForm } from "../../hooks/useAccountForm";
 
 export function FormStepThree() {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors }, getValues } = useForm();
   const passwordConfirmationRef = useRef<TextInput>(null);
 
+  const { updateFormData } = useAccountForm();
+
   function handleNextStep(data: any) {
-    console.log(data);
+    updateFormData(data);
+  };
+
+  function validationPasswordConfirmation(passwordConfirmation: string) {
+    const { password } = getValues();
+
+    return password === passwordConfirmation || "As senhas devem ser iguais."
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Escolha sua Senha</Text>
+      <Text style={styles.title}>Escolha sua senha</Text>
 
       <Input
         icon="key"
@@ -26,7 +35,11 @@ export function FormStepThree() {
         errors={errors.password?.message}
         onSubmitEditing={() => passwordConfirmationRef.current?.focus()}
         rules={{
-          required: "Senha é Obrigatória"
+          required: "Senha é Obrigatória",
+          minLength: {
+            value: 6,
+            message: "A senha deve ter pelo menos 6 dígitos."
+          }
         }}
         secureTextEntry={true}
 
@@ -52,10 +65,7 @@ export function FormStepThree() {
         onSubmitEditing={handleSubmit(handleNextStep)}
         rules={{
           required: "As senhas não são iguais.",
-          // pattern: {
-          //   value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i,
-          //   message: "Email Inválido"
-          // }
+          validate: validationPasswordConfirmation,
         }}
         secureTextEntry={true}
 

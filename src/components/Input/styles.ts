@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden'
   },
-  control: {
+  controls: {
     flex: 1,
     height: 56,
     width: '100%',
