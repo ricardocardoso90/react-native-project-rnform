@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { styles } from "./styles";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
@@ -11,7 +11,8 @@ import { Progress } from "../../components/Progress";
 export function FormStepOne() {
   const { navigate } = useNavigation();
   const emailRef = useRef<TextInput>(null);
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  // const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors } } = useFormContext();
 
   const { updateFormData } = useAccountForm();
 
@@ -22,7 +23,7 @@ export function FormStepOne() {
 
   return (
     <View style={styles.container}>
-      <Progress progress={33}/>
+      <Progress progress={33} />
       <Text style={styles.title}>Criar sua conta</Text>
 
       <Input

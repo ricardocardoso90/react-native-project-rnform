@@ -1,18 +1,19 @@
 import { useRef } from "react";
 import { styles } from "./styles";
 import { useForm } from "react-hook-form";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
 import { Text, TextInput, View } from "react-native";
 import { useAccountForm } from "../../hooks/useAccountForm";
 import { useNavigation } from "@react-navigation/native";
+
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 import { Progress } from "../../components/Progress";
 
 export function FormStepThree() {
-  const { navigate } = useNavigation();
   const passwordConfirmationRef = useRef<TextInput>(null);
   const { control, handleSubmit, formState: { errors }, getValues } = useForm();
-
+  
+  const { navigate } = useNavigation();
   const { updateFormData } = useAccountForm();
 
   function handleNextStep(data: any) {
