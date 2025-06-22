@@ -22,9 +22,10 @@ export const AccountFormContext = createContext<AccountFormContextDataProps>({} 
 
 export function AccountContext({ children }: AccountFormContextProviderProps) {
   const [accountFormData, setAccountFormData] = useState<AccountProps>({} as AccountProps);
+  const [count, setCount] = useState();         
 
   function updateFormData(data: AccountProps) {
-    setAccountFormData((prevState) => ({ ...prevState, ...data }));
+    setAccountFormData((state) => ({ ...state, ...data }));
   };
 
   return (
