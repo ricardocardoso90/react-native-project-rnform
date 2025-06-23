@@ -1,16 +1,19 @@
 import { useRef } from "react";
 import { styles } from "./styles";
-import { useForm, useFormContext } from "react-hook-form";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+
 import { Text, TextInput, View } from "react-native";
+import { useForm, useFormContext } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { useAccountForm } from "../../hooks/useAccountForm";
+
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 import { Progress } from "../../components/Progress";
 
 export function FormStepOne() {
   const { navigate } = useNavigation();
   const emailRef = useRef<TextInput>(null);
+
   // const { control, handleSubmit, formState: { errors } } = useForm();
   const { control, handleSubmit, formState: { errors } } = useFormContext();
 
